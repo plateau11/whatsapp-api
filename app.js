@@ -9,6 +9,8 @@ const body_parser = require("body-parser");
 const axios = require("axios").default;
 const app = express().use(body_parser.json()); // creates express http server
 
+app.use(express.static('public'));
+
 // Sets server port and logs message on success
 app.listen(1337, () =>
   console.log("webhook is listening")
@@ -57,6 +59,13 @@ app.post("/webhook", (req, res) => {
     res.sendStatus(404);
   }
 });
+
+
+app.get('/',(req,res)=>{
+  res.render('index.html')
+})
+
+
 
 // Accepts GET requests at the /webhook endpoint. You need this URL to setup webhook initially.
 // info on verification request payload: https://developers.facebook.com/docs/graph-api/webhooks/getting-started#verification-requests
